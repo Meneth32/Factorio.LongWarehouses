@@ -77,7 +77,7 @@ function lib_warehouse.getWHIngredients(unitSize,logisticType,subType)
 	local ingredients ={}
 	local WHparent = lib_warehouse.getWHParent(unitSize,logisticType,subType)
 	if WHparent then
-		table.insert(ingredients, {WHparent.whName,1})
+		table.insert(ingredients, {type="item",name=WHparent.whName,amount=1})
 		resourceScore = resourceScore / 2
 	end
 	local resourceCount = math.min(5,unitSize)
@@ -112,7 +112,7 @@ function lib_warehouse.getWHIngredientsByScore(resourceScore,resourceTable,maxco
 			if cnt>0 and i < maxcount then
 				i = i + 1
 				resourceScore = resourceScore - res.val*cnt
-				table.insert(ingredients, {res.name,cnt})
+				table.insert(ingredients, {type="item",name=res.name,amount=cnt})
 			end
 		end
 	end

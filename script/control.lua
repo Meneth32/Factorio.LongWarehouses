@@ -142,8 +142,8 @@ function myControl.validate_warehouse(position,force,surface,deconstructing)
 	end
 	if pole.entityType == 'entity' and wh.entityType == 'entity' then
 		-- the pole is always connected to it's wh
-		pole.entity.connect_neighbour({wire = defines.wire_type.red,target_entity = wh.entity})
-		pole.entity.connect_neighbour({wire = defines.wire_type.green,target_entity = wh.entity})
+		pole.entity.get_wire_connector(defines.wire_connector_id.circuit_red, true).connect_to(wh.entity.get_wire_connector(defines.wire_connector_id.circuit_red, true))
+		pole.entity.get_wire_connector(defines.wire_connector_id.circuit_green, true).connect_to(wh.entity.get_wire_connector(defines.wire_connector_id.circuit_green, true))
 	end
 end
 -------------------------------------------------------------------------------------
@@ -190,7 +190,7 @@ function myControl.on_built_proxy(proxy,tags)
 		position = proxy.position,
 		force = proxy.force,
 		last_user = proxy.last_user,
-		direction = proxy.direction % 4
+		direction = proxy.direction,
 	}
 	if proxyData.direction == defines.direction.east or proxyData.direction == defines.direction.west then
 		proxyData.structure_name = proxy.name:gsub("-proxy", "-v")
@@ -211,7 +211,7 @@ function myControl.on_built_proxy(proxy,tags)
 	--log(#searchResult)
 	for _, wh in pairs(searchResult) do
 		--log("configuring "..wh.name)
-		local whPrototype = game.entity_prototypes[wh.name]
+		local whPrototype = prototypes.entity[wh.name]
 		--locked slots
 		if tags and tags.bar then
 			--log("configuring locked slots")

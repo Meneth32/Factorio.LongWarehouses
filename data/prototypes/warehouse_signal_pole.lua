@@ -6,7 +6,7 @@ local signalPole = {
 	type = "programmable-speaker",
 	name = "warehouse-signal-pole",
 	collision_box = {{-0.01, -0.01}, {0.01, 0.01}},
-	collision_mask = {"colliding-with-tiles-only"},
+	collision_mask = {layers={},colliding_with_tiles_only=true},
 	selection_box = {{-0.65,-0.65},{0.65,0.65}},
 	selection_priority = 150,
 	energy_source = {
@@ -47,10 +47,10 @@ local signalPole = {
 		"not-deconstructable",
 		"player-creation",
 		"not-on-map",
-		"hidden",
 		"hide-alt-info",
 		"placeable-off-grid"
 	},
+	hidden = true,
 	icon = poleIcon,
 	icon_size = myGlobal.imageInfo[poleIcon].width,
 	icon_mipmaps = 1,
@@ -83,9 +83,7 @@ data:extend({signalPole})
 
 local signalPoleItm = {
 	type = "item",
-	flags={
-		"hidden"
-	},
+	hidden = true,
 	name = "warehouse-signal-pole",
 	icon = poleIcon,
 	icon_size = myGlobal.imageInfo[poleIcon].width,

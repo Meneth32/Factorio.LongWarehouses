@@ -27,12 +27,9 @@ local function on_blueprint(event)
 				local inventory = ent.get_inventory(defines.inventory.chest)
 				local request_slots = ""
 				local filter_slot = ""
-				for slotIndex = 1,ent.request_slot_count,1 do
-					local slot = ent.get_request_slot(slotIndex)
-					if slot then
-						request_slots = ((request_slots == "" and request_slots) or (request_slots..";"))..tostring(slotIndex)..":"..slot.name..":"..tostring(slot.count)
-					end
-				end
+				-- for _, slot in pairs(ent.item_requests) do
+					-- request_slots = ((request_slots == "" and request_slots) or (request_slots..";"))..tostring(slotIndex)..":"..slot.name..":"..tostring(slot.count)
+				-- end
 				if ent.filter_slot_count and ent.filter_slot_count > 0 and ent.storage_filter then
 					filter_slot = ent.storage_filter.type..":"..ent.storage_filter.name
 				end
